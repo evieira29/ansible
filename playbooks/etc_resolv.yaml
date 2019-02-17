@@ -8,7 +8,7 @@
     template:
       src: /ansible/templates/resolv.conf.j2
       dest: /etc/resolv.conf
-  - name: ensure chronyd is running
+  - name: ensure network is running
     service:
       name: network
       state: started
