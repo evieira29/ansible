@@ -1,0 +1,41 @@
+- hosts: test
+  remote_user: ansible
+  become: yes
+
+  tasks:
+  - name: install latest chrony
+    yum:
+      name: chrony
+      state: latest
+  - name: write chrony config file
+    template:
+      src: /ansible/templates/chrony.conf.j2
+      dest: /etc/chrony.conf
+  - name: ensure chronyd is running
+    service:
+      name: chronyd
+      state: started
+  handlers:
+    - name: restart chronyd
+      service:
+        name: chronyd
+        state: restarted
+
+  - name: write resolve config file
+    template:
+      src: /ansible/templates/resolv.conf.j2
+      dest: /etc/resolv.conf
+  - name: ensure network is running
+    service:
+      name: network
+      state: started
+  handlers:
+    - name: restart network
+      service:
+        name: network
+        state: restarted
+    - name: stop Network Manager
+      service:
+        name: NetworkManager
+        state: stopped
+        enabled: no
