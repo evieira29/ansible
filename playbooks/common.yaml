@@ -20,7 +20,6 @@
       service:
         name: chronyd
         state: restarted
-
   - name: write resolve config file
     template:
       src: /ansible/templates/resolv.conf.j2
