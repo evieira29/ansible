@@ -1,0 +1,23 @@
+---
+- hosts: test
+  remote_user: ansible
+  become: yes
+
+  tasks:
+  - name: install latest chrony
+    yum:
+      name: chrony
+      state: latest
+  - name: write chrony config file
+    template:
+      src: /ansible/templates/chrony.conf.j2
+      dest: /etc/chrony.conf
+  - name: ensure chronyd is running
+    service:
+      name: chronyd
+      state: started
+  handlers:
+    - name: restart chronyd
+      service:
+        name: chronyd
+        state: restarted

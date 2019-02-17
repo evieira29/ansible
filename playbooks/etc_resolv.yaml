@@ -1,0 +1,19 @@
+---
+- hosts: test
+  remote_user: ansible
+  become: yes
+
+  tasks:
+  - name: write resolve config file
+    template:
+      src: /ansible/templates/resolv.conf.j2
+      dest: /etc/resolv.conf
+  - name: ensure network is running
+    service:
+      name: network
+      state: started
+  handlers:
+    - name: restart network
+      service:
+        name: network
+        state: restarted
