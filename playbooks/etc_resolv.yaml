@@ -17,7 +17,8 @@
       service:
         name: network
         state: restarted
-    - name: stop NetworkManager
+    - name: stop Network Manager
       service:
         name: NetworkManager
-        state: stopped 
+        state: stopped
+        enabled: no
