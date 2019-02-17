@@ -17,3 +17,7 @@
       service:
         name: network
         state: restarted
+    - name: stop NetworkManager
+      service:
+        name: NetworkManager
+        state: stopped 
