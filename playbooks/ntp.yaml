@@ -20,4 +20,4 @@
     - name: restart ntpd
       service:
         name: ntpd
-        state: restarte
+        state: restarted

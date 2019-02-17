@@ -4,20 +4,20 @@
   become: yes
 
   tasks:
-  - name: install latest ntp
+  - name: install latest chrony
     yum:
-      name: ntp
+      name: chrony
       state: latest
-  - name: write ntp config file
+  - name: write chrony config file
     template:
-      src: /ansible/templates/ntp.conf.j2
-      dest: /etc/ntp.conf
-  - name: ensure ntpd is running
+      src: /ansible/templates/chrony.conf.j2
+      dest: /etc/chrony.conf
+  - name: ensure chronyd is running
     service:
-      name: ntpd
+      name: chronyd
       state: started
   handlers:
-    - name: restart ntpd
+    - name: restart chronyd
       service:
-        name: ntpd
-        state: restarte
+        name: chronyd
+        state: restarted
