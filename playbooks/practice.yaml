@@ -8,3 +8,7 @@
       service:
         name: NetworkManager
         state: started
+  tasks:
+    - name: run echo command
+      shell: /bin/echo $HOSTNAME
+        dest: /hostname.txt
