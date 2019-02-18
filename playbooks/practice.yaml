@@ -1,0 +1,10 @@
+---
+- hosts: test
+  remote_user: ansible
+  become: yes
+
+  tasks:
+    - name: check if NetworkManager is running
+      service:
+        name: NetworkManager
+        state: started
