@@ -3,6 +3,16 @@
   become: yes
 
   tasks:
+  - name: install all initial packages
+    yum:
+      name: "{{ item }}"
+      state: latest
+      with_items:
+        - man
+        - man-pages
+        - mlocate
+        - bind-utils
+  tasks:
   - name: install latest chrony
     yum:
       name: chrony
@@ -34,8 +44,8 @@
       service:
         name: network
         state: restarted
-    - name: stop Network Manager
-      service:
+    - name: remove Network Manager
+      yum:
         name: NetworkManager
-        state: stopped
+        state: absent
         enabled: no
